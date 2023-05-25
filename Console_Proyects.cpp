@@ -49,9 +49,9 @@ void juego(int n) {
 	if (i == n + 1)
 	{
 
-		if (puntj > punto) cout << "HAS GANADO" << endl;
-		else if (puntj == punto) cout << "HABEIS EMPATADO" << endl;
-		else cout << "HAS PERDIDO" << endl;
+		if (puntj > punto) cout << "GANASTE B)" << endl;
+		else if (puntj == punto) cout << "HAN EMPATADO :0" << endl;
+		else cout << "PERDISTE PINSHE MALO XD" << endl;
 	}
 }
 
