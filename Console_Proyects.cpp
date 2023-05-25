@@ -1,30 +1,92 @@
-
-#include <iostream>
-#include <string>
-#include <vector>
-
+#include<iostream>
+#include<time.h>
+#include<string.h>
+#define max  100
 using namespace std;
+void juego(int n);
+void juego1(int* p, int a);
+void puntuacion(int* pj, int* po, int j, int o);
+
 int main()
 {
-	
-	vector<string> Inventory;
-	Inventory.push_back("");
-	Inventory.push_back("");
-	Inventory.push_back("");
-	Inventory.push_back("");
-	Inventory.push_back("");
+	int n;
 
-	cout << "You have to choose five items" << endl;
-	cin >> Inventory[0];
-	cin >> Inventory[1];
-	cin >> Inventory[2];
-	cin >> Inventory[3];
-	cin >> Inventory[4];
-
-	cout << "This are the items " << Inventory.size() << " You have Choosen: " << endl;
-
-	for (unsigned int i = 0; i < Inventory.size(); i++)
+	cout << "Introduce el numero de partidas que quieres jugar:";
+	cin >> n;
+	if (n > 0 && n <= max)
 	{
-		cout << Inventory[i] << endl;
+		system("cls");
+		juego(n);
+	}
+	return 0;
+}
+
+void juego(int n) {
+	int* pj, * po;
+	int puntj = 0, punto = 0;
+	pj = &puntj;
+	po = &punto;
+	srand(time(NULL));
+	int j = 0, o = 0, i = 1;
+	int* cont;
+
+	cout << "Pulsa 1 para sacar piedra, 2 para papel o 3 para tijeras." << endl;
+	for (i = 1; i <= n; i++)
+	{
+		cont = &i;
+		cout << "-Partida " << i << endl << endl;
+		cout << "Numero: ";
+		cin >> j;
+		cout << "Jugador: ";
+		juego1(cont, j);
+		o = 1 + rand() % 3;
+		cout << "Ordenador: ";
+		juego1(cont, o);
+		puntuacion(pj, po, j, o);
+		cout << "Puntuacion: " << puntj << " - " << punto << endl << endl;
+	}
+
+	if (i == n + 1)
+	{
+
+		if (puntj > punto) cout << "HAS GANADO" << endl;
+		else if (puntj == punto) cout << "HABEIS EMPATADO" << endl;
+		else cout << "HAS PERDIDO" << endl;
+	}
+}
+
+void juego1(int* p, int a)
+{
+	string s;
+	switch (a)
+	{
+	case 1:
+		s = "Piedra";
+		break;
+	case 2:
+		s = "Papel";
+		break;
+	case 3:
+		s = "Tijera";
+		break;
+	default:
+		s = "Error";
+		*p = max + 2;
+	}
+	cout << s << endl;
+}
+
+void puntuacion(int* pj, int* po, int j, int o)
+{
+	if (j == o)
+	{
+		*pj += 1;
+		*po += 1;
+	}
+	else
+	{
+		if ((j == 1 && o == 3) || (j > o && (j + o) % 2 == 1)) { *pj += 1; }
+
+		else { *po += 1; }
 	}
 }
